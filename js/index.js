@@ -1,28 +1,26 @@
 /* ===================================================
  * Content toggler with min height version 1
  * =================================================== */
-
 +(function($){
 	function toggleContent(){ 
   
 			var _this = this;
 			/*  Here is configuration */
-			this.selector     = $('.show-less'); /* hide and show content selector */
-			this.btnClassName = 'btn-content-toggler'; /* read more button class name*/
-			this.rgClassName  = 'rg'; /* grediant class name */
+			this.selector        = $('.show-less'); /* hide and show content selector */
+			this.btnClassName    = 'btn-content-toggler'; /* read more button class name*/
+			this.rgClassName     = 'rg'; /* grediant class name */
 			this.toggleClassName = 'open';  /* toggler class name on read more button */
-			this.minHeight    = 100; /* initial content height */
-			this.moreTxt      = 'Read more';  /* button text initial */
-			this.lessTxt      = 'Read Less'; /* button text after show all content */
-			this.button       = '<button class="'+ this.btnClassName +'">'+this.moreTxt+'</button>';
-
+			this.minHeight       = 100; /* initial content height */
+			this.moreTxt         = 'Read more';  /* button text initial */
+			this.lessTxt         = 'Read Less'; /* button text after show all content */
+			this.duration        = 500;
+			this.button          = '<button class="'+ this.btnClassName +'">'+this.moreTxt+'</button>';
+			
 			this.init = function(){
-				if($(this.selector).length <= 0){
-					return;
+				if($(this.selector).length > 0){
+					this.limitHeight();
+					this.toggleBtnTxt();
 				}
-				this.limitHeight();
-				this.selector.after(this.button);
-				this.toggleBtnTxt();
 			};   
 
 			this.toggleBtnTxt = function(){
@@ -38,14 +36,25 @@
 			};
 
 			this.limitHeight = function(){
-				this.selector
-					.css({'height' : this.minHeight, 'overflow':'hidden'});
+				var self = this;
+				
+				this.selector.each(function( index ){
+					var actualHeight = $(this)[0].scrollHeight;
+						if( actualHeight > self.minHeight ){
+								$(this)
+									.css({'height' : self.minHeight, 'overflow':'hidden'});
+							$(this).after(self.button);
+						}else{
+							$(this).addClass(self.rgClassName);
+						}
+				});
+				
 			};
 
 			this.hideContent = function( target ){
 				$(target)
 					.prev()
-					.css({'height' : this.minHeight, 'overflow':'hidden'})
+					.animate({height : this.minHeight}, this.duration)
 					.removeClass(this.rgClassName);
 				$(target).text(this.moreTxt);
 			};
@@ -53,7 +62,7 @@
 			this.showContent = function( target ){
 				$(target)
 					.prev()
-					.css({'height': $(target).prev()[0].scrollHeight})
+				  .animate({height : $(target).prev()[0].scrollHeight}, this.duration)
 					.addClass(this.rgClassName);
 				$(target).text(this.lessTxt);
 			};
