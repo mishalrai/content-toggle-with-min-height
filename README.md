@@ -1,1 +1,1 @@
-# content-toggle-with-min-height
+# Content-toggle-with-min-height
