@@ -1,0 +1,46 @@
+.show-less {
+  -webkit-transition: height 0.5s ease-in-out;
+  transition: height 0.5s ease-in-out;
+  position: relative;
+}
+.show-less:after {
+  content: "";
+  opacity: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  background-image: -moz-linear-gradient(top, transparent, white);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, transparent), color-stop(1, white));
+}
+.show-less.rg:after {
+  opacity: 0;
+}
+
+/* Extra decoration */
+body {
+  background-color: #F4F4F4;
+  padding: 20px 50px;
+}
+
+.show-less {
+  background-color: #fff;
+  padding: 15px;
+  margin: 0;
+  box-shadow: 0px 0px 0 5px #ddd;
+}
+.show-less + button {
+  cursor: pointer;
+  background-color: #1cad40;
+  border: none;
+  color: #fff;
+  padding: 8px 15px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
+}
+.show-less + button:focus {
+  outline: none;
+}
