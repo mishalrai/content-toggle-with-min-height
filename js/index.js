@@ -10,7 +10,7 @@
 			this.btnClassName    = 'btn-content-toggler'; /* read more button class name*/
 			this.rgClassName     = 'rg'; /* grediant class name */
 			this.toggleClassName = 'open';  /* toggler class name on read more button */
-			this.minHeight       = 100; /* initial content height */
+			this.minHeight       = typeof $('.show-more').attr('data-height') !=='undefined' ? $('.show-more').attr('data-height') : 100; /* initial content height */
 			this.moreTxt         = 'Read more';  /* button text initial */
 			this.lessTxt         = 'Read Less'; /* button text after show all content */
 			this.duration        = 500;
